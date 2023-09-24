@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 
+	"test/logs/logging"
+
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 )
 
@@ -25,6 +27,9 @@ type EnrichedFIO struct {
 }
 
 func main() {
+	logger := logging.GetLogger()
+	logger.Info("create router")
+
 	c, err := kafka.NewConsumer(&kafka.ConfigMap{
 		"bootstrap.servers": "localhost:9092",
 		"group.id":          "fio-group",
